@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio SkyWalker – Nos réalisations en marketing digital, développement web & mobile et branding à Douala, Cameroun." />
+  <meta name="theme-color" content="#0d0d2b" />
+  <title>Portfolio | SkyWalker – Agence de Transformation Numérique</title>
+  <link rel="icon" type="image/png" href="assets/images/logo-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sw-dark':       '#0d0d2b',
+            'sw-deeper':     '#050514',
+            'sw-card':       '#1a1a4e',
+            'sw-green':      '#2ecc71',
+            'sw-green-dark': '#27ae60',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0d0d2b; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    #navbar { background: transparent; transition: background .4s, backdrop-filter .4s, box-shadow .4s; }
+    #navbar.scrolled {
+      background: rgba(13,13,43,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 2px 24px rgba(0,0,0,.5);
+    }
+
+    /* ── Bouton navbar ───────────────────────────────────────── */
+    .btn-green { background-color:#2ecc71; color:#0d0d2b; font-weight:700; transition: background-color .25s, transform .2s, box-shadow .25s; }
+    .btn-green:hover { background-color:#27ae60; transform:translateY(-2px); box-shadow:0 8px 24px rgba(46,204,113,.4); }
+
+    /* ── Séparateur ──────────────────────────────────────────── */
+    .green-line { width:48px; height:3px; background:#2ecc71; border-radius:2px; }
+
+    /* ── Animations hero ─────────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation: fadeUp .85s ease forwards; }
+
+    /* ── Hero motif géométrique ──────────────────────────────── */
+    .hero-geo {
+      background-color: #0d0d2b;
+      background-image:
+        linear-gradient(rgba(46,204,113,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,204,113,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── Section fond blanc ──────────────────────────────────── */
+    .section-light { background:#fff; color:#111; }
+
+    /* ── Boutons filtre ──────────────────────────────────────── */
+    .filter-btn {
+      border: 1.5px solid #d1d5db;
+      border-radius: 9999px;
+      padding: .5rem 1.5rem;
+      font-size: .875rem;
+      font-weight: 600;
+      color: #444;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .25s, background .25s, color .25s, box-shadow .25s, transform .2s;
+    }
+    .filter-btn:hover {
+      border-color: #2ecc71;
+      color: #27ae60;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(46,204,113,.15);
+    }
+    .filter-btn.active {
+      background: #2ecc71;
+      border-color: #2ecc71;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(46,204,113,.3);
+    }
+
+    /* ── Cards projet ────────────────────────────────────────── */
+    .project-card {
+      background: #fff;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: #2ecc71;
+      box-shadow: 0 12px 40px rgba(46,204,113,.15);
+      transform: translateY(-6px);
+    }
+
+    /* En-tête card avec gradient sombre */
+    .card-header {
+      height: 180px;
+      background: linear-gradient(135deg, #0d0d2b 0%, #1a1a4e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 100%, rgba(46,204,113,.08) 0%, transparent 65%);
+    }
+    .card-header-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(46,204,113,.1);
+      border-radius: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Badge catégorie */
+    .card-badge {
+      position: absolute;
+      top: .875rem;
+      right: .875rem;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .25rem .75rem;
+      border-radius: 9999px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .badge-marketing { background: rgba(46,204,113,.2); color: #2ecc71; }
+    .badge-tech      { background: rgba(99,102,241,.2); color: #818cf8; }
+    .badge-branding  { background: rgba(251,191,36,.2); color: #f59e0b; }
+
+    /* Corps card */
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: .5rem; line-height: 1.4; }
+    .card-desc  { font-size: .85rem; color: #666; line-height: 1.7; flex: 1; margin-bottom: 1rem; }
+
+    /* Tags pills */
+    .tag-pill {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .2rem .65rem;
+      border-radius: 9999px;
+      background: rgba(46,204,113,.1);
+      color: #27ae60;
+      white-space: nowrap;
+    }
+
+    /* Résultat */
+    .card-result {
+      border-top: 1px solid #f0f0f0;
+      padding-top: .875rem;
+      margin-top: .875rem;
+      font-size: .8rem;
+      color: #27ae60;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* ── Filtrage fade ───────────────────────────────────────── */
+    .project-card {
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease, opacity .35s ease;
+    }
+    .project-card.hidden-card {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    /* ── Section stats ───────────────────────────────────────── */
+    #stats-section { background: #0d0d2b; }
+    .stat-box { border: 1px solid rgba(46,204,113,.15); border-radius: 1rem; padding: 2rem 1.5rem; text-align: center; }
+    .stat-number { font-size: 2.75rem; font-weight: 900; color: #2ecc71; line-height: 1; }
+    .stat-label  { font-size: .875rem; color: rgba(255,255,255,.55); margin-top: .5rem; font-weight: 500; }
+
+    /* ── CTA vert ────────────────────────────────────────────── */
+    #cta-portfolio { background: #2ecc71; }
+    .btn-dark { background-color:#0d0d2b; color:#fff; font-weight:700; transition: background-color .25s, transform .2s, box-shadow .25s; }
+    .btn-dark:hover { background-color:#1a1a4e; transform:translateY(-2px); box-shadow:0 8px 24px rgba(13,13,43,.35); }
+
+    /* ── Reveal scroll ───────────────────────────────────────── */
+    .reveal, .reveal-l, .reveal-r { opacity:0; transition: opacity .8s ease, transform .8s ease; }
+    .reveal   { transform:translateY(40px); }
+    .reveal-l { transform:translateX(-52px); }
+    .reveal-r { transform:translateX(52px); }
+    .reveal.visible, .reveal-l.visible, .reveal-r.visible { opacity:1; transform:none; }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.24s; }
+    .d3 { transition-delay:.38s; }
+    .d4 { transition-delay:.52s; }
+    .d5 { transition-delay:.66s; }
+    .d6 { transition-delay:.80s; }
+    .d7 { transition-delay:.94s; }
+    .d8 { transition-delay:1.08s; }
+    .d9 { transition-delay:1.22s; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer { background:#050514; }
+    footer a:hover { color:#2ecc71; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex-shrink-0">
+          <img src="assets/images/logo-horizontal.png" alt="SkyWalker" class="h-10 lg:h-12 w-auto object-contain" />
+        </a>
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+          <li><a href="index.html"     class="hover:text-sw-green transition-colors">Accueil</a></li>
+          <li><a href="services.html"  class="hover:text-sw-green transition-colors">Services</a></li>
+          <li><a href="portfolio.html" class="text-sw-green font-semibold">Portfolio</a></li>
+          <li><a href="contact.html"   class="btn-green px-5 py-2 rounded-full text-sm">Nous contacter</a></li>
+        </ul>
+        <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5" aria-label="Ouvrir le menu">
+          <span class="hamburger-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="hamburger-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="hamburger-line block w-4 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0d0d2b]/96 backdrop-blur-md border-t border-white/10">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html"     class="block text-white/80 hover:text-sw-green py-1 transition-colors">Accueil</a></li>
+        <li><a href="services.html"  class="block text-white/80 hover:text-sw-green py-1 transition-colors">Services</a></li>
+        <li><a href="portfolio.html" class="block text-sw-green font-semibold py-1">Portfolio</a></li>
+        <li><a href="contact.html"   class="block text-white/80 hover:text-sw-green py-1 transition-colors">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════ HERO PORTFOLIO ═══════════ -->
+  <section class="hero-geo relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+
+    <!-- Halo radial -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(ellipse 70% 55% at 50% 30%, rgba(46,204,113,.08) 0%, transparent 65%); z-index:1;"></div>
+
+    <!-- Coins décoratifs -->
+    <div class="absolute top-0 left-0 w-72 h-72 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(circle at top left, rgba(46,204,113,.06) 0%, transparent 60%); z-index:1;"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(circle at bottom right, rgba(46,204,113,.06) 0%, transparent 60%); z-index:1;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-28 pb-16">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center justify-center gap-2 text-xs text-white/40 mb-6 fade-up" style="animation-delay:.1s" aria-label="Fil d'Ariane">
+        <a href="index.html" class="hover:text-sw-green transition-colors">Accueil</a>
+        <svg class="w-3 h-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-sw-green font-medium">Portfolio</span>
+      </nav>
+
+      <!-- Label -->
+      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-semibold text-sw-green uppercase tracking-widest mb-6 fade-up" style="animation-delay:.2s">
+        <span class="w-1.5 h-1.5 rounded-full bg-sw-green animate-pulse inline-block"></span>
+        Nos réalisations
+      </div>
+
+      <!-- Titre principal -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-5 fade-up" style="animation-delay:.35s">
+        Nos <span class="text-sw-green">Réalisations</span>
+      </h1>
+
+      <!-- Séparateur -->
+      <div class="green-line mx-auto mb-5 fade-up" style="animation-delay:.45s"></div>
+
+      <!-- Sous-titre -->
+      <p class="text-lg sm:text-xl text-sw-green font-semibold fade-up" style="animation-delay:.55s">
+        Des projets qui parlent d'eux-mêmes
+      </p>
+      <p class="mt-3 text-white/50 text-base max-w-xl mx-auto leading-relaxed fade-up" style="animation-delay:.65s">
+        Chaque projet est une histoire de transformation digitale menée avec passion et expertise depuis Douala.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SECTION FILTRES ═══════════ -->
+  <section class="section-light py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="flex flex-wrap items-center justify-center gap-3 reveal">
+        <button class="filter-btn active" data-filter="all">
+          Tous
+          <span id="count-all" class="ml-1.5 text-xs opacity-70">(9)</span>
+        </button>
+        <button class="filter-btn" data-filter="marketing">
+          <svg class="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Marketing Digital
+          <span class="ml-1.5 text-xs opacity-70">(3)</span>
+        </button>
+        <button class="filter-btn" data-filter="tech">
+          <svg class="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          Tech &amp; Dev
+          <span class="ml-1.5 text-xs opacity-70">(3)</span>
+        </button>
+        <button class="filter-btn" data-filter="branding">
+          <svg class="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          Branding
+          <span class="ml-1.5 text-xs opacity-70">(3)</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SECTION PROJETS ═══════════ -->
+  <section class="section-light pb-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Grille 3 colonnes -->
+      <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+
+        <!-- ── Projet 1 — Marketing ── -->
+        <div class="project-card reveal d1" data-cat="marketing">
+          <div class="card-header">
+            <span class="card-badge badge-marketing">Marketing Digital</span>
+            <div class="card-header-icon">
+              <!-- Icône : graphique en hausse -->
+              <svg class="w-9 h-9 text-sw-green" fill="none" stroke="#2ecc71" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 8v8m-4-5v5m-4-2v2M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Campagne Meta Ads — Restaurant Le Plateau</h3>
+            <p class="card-desc">Campagne publicitaire Facebook &amp; Instagram ayant généré +300% de réservations en 3 mois.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">Meta Ads</span>
+              <span class="tag-pill">Facebook</span>
+              <span class="tag-pill">Instagram</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              +300% de réservations
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 2 — Tech ── -->
+        <div class="project-card reveal d2" data-cat="tech">
+          <div class="card-header">
+            <span class="card-badge badge-tech">Tech &amp; Dev</span>
+            <div class="card-header-icon">
+              <!-- Icône : smartphone -->
+              <svg class="w-9 h-9" fill="none" stroke="#818cf8" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Application Mobile — FinTech CamerPay</h3>
+            <p class="card-desc">Application de paiement mobile développée pour le marché camerounais. iOS &amp; Android.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">React Native</span>
+              <span class="tag-pill">iOS</span>
+              <span class="tag-pill">Android</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              10 000+ téléchargements
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 3 — Branding ── -->
+        <div class="project-card reveal d3" data-cat="branding">
+          <div class="card-header">
+            <span class="card-badge badge-branding">Branding</span>
+            <div class="card-header-icon">
+              <!-- Icône : palette -->
+              <svg class="w-9 h-9" fill="none" stroke="#f59e0b" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Identité Visuelle — Startup AgriTech Yaoundé</h3>
+            <p class="card-desc">Création complète de l'identité visuelle : logo, charte graphique, supports de communication.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">Logo</span>
+              <span class="tag-pill">Charte graphique</span>
+              <span class="tag-pill">Branding</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              Identité complète en 2 semaines
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 4 — Marketing ── -->
+        <div class="project-card reveal d4" data-cat="marketing">
+          <div class="card-header">
+            <span class="card-badge badge-marketing">Marketing Digital</span>
+            <div class="card-header-icon">
+              <!-- Icône : musique / contenu -->
+              <svg class="w-9 h-9" fill="none" stroke="#2ecc71" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Stratégie TikTok — Marque Mode Douala</h3>
+            <p class="card-desc">Stratégie de contenu TikTok ayant permis d'atteindre 50 000 abonnés en 6 mois.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">TikTok</span>
+              <span class="tag-pill">Stratégie</span>
+              <span class="tag-pill">Contenu</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              50 000 abonnés en 6 mois
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 5 — Tech ── -->
+        <div class="project-card reveal d5" data-cat="tech">
+          <div class="card-header">
+            <span class="card-badge badge-tech">Tech &amp; Dev</span>
+            <div class="card-header-icon">
+              <!-- Icône : panier / e-commerce -->
+              <svg class="w-9 h-9" fill="none" stroke="#818cf8" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Site E-commerce — Boutique BeautyAfrica</h3>
+            <p class="card-desc">Plateforme e-commerce complète avec paiement Mobile Money intégré.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">E-commerce</span>
+              <span class="tag-pill">Mobile Money</span>
+              <span class="tag-pill">Web</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              200+ commandes/mois
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 6 — Branding ── -->
+        <div class="project-card reveal d6" data-cat="branding">
+          <div class="card-header">
+            <span class="card-badge badge-branding">Branding</span>
+            <div class="card-header-icon">
+              <!-- Icône : mégaphone / communication -->
+              <svg class="w-9 h-9" fill="none" stroke="#f59e0b" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Campagne Visuelle — ONG EduCamer</h3>
+            <p class="card-desc">Création de visuels et supports de communication pour une campagne de sensibilisation nationale.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">Visuels</span>
+              <span class="tag-pill">Communication</span>
+              <span class="tag-pill">ONG</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              50 000 personnes touchées
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 7 — Marketing ── -->
+        <div class="project-card reveal d7" data-cat="marketing">
+          <div class="card-header">
+            <span class="card-badge badge-marketing">Marketing Digital</span>
+            <div class="card-header-icon">
+              <!-- Icône : fusée / lancement -->
+              <svg class="w-9 h-9" fill="none" stroke="#2ecc71" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Lancement Produit — App SantéCamer</h3>
+            <p class="card-desc">Stratégie de lancement complète pour une application de santé digitale au Cameroun.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">Lancement</span>
+              <span class="tag-pill">Stratégie</span>
+              <span class="tag-pill">App</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              5 000 utilisateurs J+30
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 8 — Tech ── -->
+        <div class="project-card reveal d8" data-cat="tech">
+          <div class="card-header">
+            <span class="card-badge badge-tech">Tech &amp; Dev</span>
+            <div class="card-header-icon">
+              <!-- Icône : cloud / SaaS -->
+              <svg class="w-9 h-9" fill="none" stroke="#818cf8" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Plateforme SaaS — GestionPro Cameroun</h3>
+            <p class="card-desc">Outil de gestion d'entreprise développé sur mesure pour les PME camerounaises.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">SaaS</span>
+              <span class="tag-pill">Web App</span>
+              <span class="tag-pill">PME</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              150+ entreprises utilisatrices
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Projet 9 — Branding ── -->
+        <div class="project-card reveal d9" data-cat="branding">
+          <div class="card-header">
+            <span class="card-badge badge-branding">Branding</span>
+            <div class="card-header-icon">
+              <!-- Icône : étoile / premium -->
+              <svg class="w-9 h-9" fill="none" stroke="#f59e0b" viewBox="0 0 24 24" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Identité Visuelle — Hôtel Wouri Douala</h3>
+            <p class="card-desc">Refonte complète de l'identité visuelle d'un hôtel 4 étoiles à Douala.</p>
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              <span class="tag-pill">Rebranding</span>
+              <span class="tag-pill">Hôtellerie</span>
+              <span class="tag-pill">Luxe</span>
+            </div>
+            <div class="card-result">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              Image premium repositionnée
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fin #projects-grid -->
+
+      <!-- Message aucun résultat (masqué par défaut) -->
+      <div id="no-results" class="hidden text-center py-16">
+        <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p class="text-gray-400 font-medium">Aucun projet dans cette catégorie pour le moment.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SECTION STATS ═══════════ -->
+  <section id="stats-section" class="py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- En-tête -->
+      <div class="text-center mb-14 reveal">
+        <p class="text-sw-green text-xs font-bold uppercase tracking-widest mb-3">En chiffres</p>
+        <h2 class="text-3xl lg:text-4xl font-black">Notre impact, mesuré</h2>
+        <div class="green-line mx-auto mt-4"></div>
+      </div>
+
+      <!-- Grille stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="stat-box reveal d1">
+          <div class="stat-number">
+            <span class="counter" data-target="50">0</span><span>+</span>
+          </div>
+          <div class="stat-label">Projets livrés</div>
+        </div>
+
+        <div class="stat-box reveal d2">
+          <div class="stat-number">
+            <span class="counter" data-target="30">0</span><span>+</span>
+          </div>
+          <div class="stat-label">Clients satisfaits</div>
+        </div>
+
+        <div class="stat-box reveal d3">
+          <div class="stat-number">
+            <span class="counter" data-target="3">0</span>
+          </div>
+          <div class="stat-label">Années d'expérience</div>
+        </div>
+
+        <div class="stat-box reveal d4">
+          <div class="stat-number">
+            <span class="counter" data-target="98">0</span><span>%</span>
+          </div>
+          <div class="stat-label">Taux de satisfaction</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SECTION CTA ═══════════ -->
+  <section id="cta-portfolio" class="py-20">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center reveal">
+      <p class="text-[#0d0d2b]/60 text-xs font-bold uppercase tracking-widest mb-4">Prêt à nous rejoindre ?</p>
+      <h2 class="text-3xl lg:text-5xl font-black text-[#0d0d2b] leading-tight mb-4">
+        Votre projet sera notre<br class="hidden sm:block" /> prochaine réalisation
+      </h2>
+      <p class="text-[#0d0d2b]/70 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+        Rejoignez les 30+ entreprises qui ont déjà transformé leur présence digitale avec SkyWalker.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="contact.html" class="btn-dark px-8 py-4 rounded-full text-base inline-flex items-center gap-2">
+          Démarrer mon projet
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="services.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-[#0d0d2b] border-2 border-[#0d0d2b]/20 hover:border-[#0d0d2b]/60 transition-colors">
+          Voir nos services
+        </a>
+      </div>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-6">
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <span class="text-xs font-semibold">Réponse sous 24h</span>
+        </div>
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <span class="text-xs font-semibold">Devis gratuit &amp; sans engagement</span>
+        </div>
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <span class="text-xs font-semibold">98% de clients satisfaits</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="border-t border-white/5 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div class="md:col-span-2">
+          <img src="assets/images/logo-horizontal.png" alt="SkyWalker" class="h-10 w-auto object-contain mb-5" />
+          <p class="text-white/35 text-sm leading-relaxed max-w-xs">
+            Agence de transformation numérique basée à Douala, Cameroun.
+            Nous transformons vos idées en réalités digitales rentables.
+          </p>
+          <p class="text-sw-green font-semibold text-sm mt-4 italic">"Turn your passion into money"</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Navigation</h4>
+          <ul class="space-y-3 text-sm text-white/35">
+            <li><a href="index.html"     class="hover:text-sw-green transition-colors">Accueil</a></li>
+            <li><a href="services.html"  class="hover:text-sw-green transition-colors">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-sw-green transition-colors">Portfolio</a></li>
+            <li><a href="contact.html"   class="hover:text-sw-green transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Services</h4>
+          <ul class="space-y-3 text-sm text-white/35">
+            <li><a href="services.html#marketing" class="hover:text-sw-green transition-colors">Marketing Digital</a></li>
+            <li><a href="services.html#tech"       class="hover:text-sw-green transition-colors">Tech &amp; Développement</a></li>
+            <li><a href="services.html#branding"   class="hover:text-sw-green transition-colors">Créatif &amp; Branding</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/20 text-xs">&copy; 2026 SkyWalker. Tous droits réservés. · Douala, Cameroun</p>
+        <p class="text-white/20 text-xs">Conçu avec passion par l'équipe SkyWalker</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <script>
+    /* ── Navbar scroll ───────────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Menu hamburger ──────────────────────────────────────── */
+    const menuBtn    = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hLines     = menuBtn.querySelectorAll('.hamburger-line');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', isOpen);
+      if (!isOpen) {
+        hLines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        hLines[1].style.opacity   = '0';
+        hLines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        hLines[2].style.width     = '24px';
+      } else {
+        hLines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        hLines[2].style.width = '16px';
+      }
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        hLines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        hLines[2].style.width = '16px';
+      });
+    });
+
+    /* ── Filtrage projets ────────────────────────────────────── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards      = document.querySelectorAll('#projects-grid .project-card');
+    const noResults  = document.getElementById('no-results');
+    const grid       = document.getElementById('projects-grid');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        /* Mise à jour bouton actif */
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        /* Affichage / masquage des cards */
+        let visible = 0;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.cat === filter;
+          if (match) {
+            card.style.opacity    = '0';
+            card.style.transform  = 'translateY(20px)';
+            card.style.position   = '';
+            card.style.visibility = '';
+            card.style.pointerEvents = '';
+            /* Petite animation d'entrée */
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity .35s ease, transform .35s ease, border-color .3s ease, box-shadow .3s ease';
+              card.style.opacity    = '1';
+              card.style.transform  = 'translateY(0)';
+            });
+            visible++;
+          } else {
+            card.style.opacity       = '0';
+            card.style.transform     = 'translateY(12px)';
+            card.style.position      = 'absolute';
+            card.style.visibility    = 'hidden';
+            card.style.pointerEvents = 'none';
+          }
+        });
+
+        /* Message vide */
+        noResults.classList.toggle('hidden', visible > 0);
+        grid.style.minHeight = visible === 0 ? '0' : '';
+      });
+    });
+
+    /* ── Reveal au scroll ────────────────────────────────────── */
+    const revEls = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revEls.forEach(el => revObs.observe(el));
+
+    /* ── Compteurs animés ────────────────────────────────────── */
+    const counterEls = document.querySelectorAll('.counter');
+    let countersStarted = false;
+
+    function animateCounter(el) {
+      const target   = parseInt(el.dataset.target, 10);
+      const duration = 1800;
+      const start    = performance.now();
+      function step(now) {
+        const elapsed  = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        /* Easing ease-out cubic */
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(ease * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    const statsSection = document.getElementById('stats-section');
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !countersStarted) {
+          countersStarted = true;
+          counterEls.forEach(el => animateCounter(el));
+          statsObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    statsObs.observe(statsSection);
+  </script>
+
+</body>
+</html>
