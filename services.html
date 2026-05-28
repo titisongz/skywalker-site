@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Services SkyWalker – Marketing digital, développement web & mobile, branding à Douala, Cameroun." />
+  <meta name="theme-color" content="#0d0d2b" />
+  <title>Services | SkyWalker – Agence de Transformation Numérique</title>
+  <link rel="icon" type="image/png" href="assets/images/logo-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sw-dark':       '#0d0d2b',
+            'sw-deeper':     '#050514',
+            'sw-card':       '#1a1a4e',
+            'sw-green':      '#2ecc71',
+            'sw-green-dark': '#27ae60',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0d0d2b; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    #navbar { background: transparent; transition: background .4s, backdrop-filter .4s, box-shadow .4s; }
+    #navbar.scrolled {
+      background: rgba(13,13,43,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 2px 24px rgba(0,0,0,.5);
+    }
+
+    /* ── Bouton navbar ───────────────────────────────────────── */
+    .btn-green { background-color:#2ecc71; color:#0d0d2b; font-weight:700; transition: background-color .25s, transform .2s, box-shadow .25s; }
+    .btn-green:hover { background-color:#27ae60; transform:translateY(-2px); box-shadow:0 8px 24px rgba(46,204,113,.4); }
+
+    /* ── Séparateur ──────────────────────────────────────────── */
+    .green-line { width:48px; height:3px; background:#2ecc71; border-radius:2px; }
+
+    /* ── Animations hero ─────────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation: fadeUp .85s ease forwards; }
+
+    /* ── Hero motif géométrique ──────────────────────────────── */
+    .hero-geo {
+      background-color: #0d0d2b;
+      background-image:
+        linear-gradient(rgba(46,204,113,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,204,113,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── Sections fond blanc ─────────────────────────────────── */
+    .section-light { background:#fff; color:#111; }
+    .section-light .sec-label { color:#27ae60; }
+    .section-light h2 { color:#111; }
+    .section-light .sec-sub { color:#666; }
+
+    /* ── Cards services — fond blanc ─────────────────────────── */
+    .svc-card {
+      background:#fff;
+      border:1.5px solid #e5e7eb;
+      border-radius:1rem;
+      padding:2rem 1.75rem;
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+    .svc-card:hover {
+      border-color:#2ecc71;
+      box-shadow:0 8px 32px rgba(46,204,113,.15);
+      transform:translateY(-5px);
+    }
+    .svc-icon {
+      width:3.25rem; height:3.25rem;
+      background:rgba(46,204,113,.1);
+      border-radius:.875rem;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.25rem;
+      transition: transform .35s ease, background .3s ease;
+      flex-shrink:0;
+    }
+    .svc-card:hover .svc-icon { transform:rotate(8deg) scale(1.05); background:rgba(46,204,113,.18); }
+    .svc-card h3 { color:#111; font-size:1.05rem; font-weight:700; margin-bottom:.5rem; }
+    .svc-card p  { color:#666; font-size:.875rem; line-height:1.7; margin-bottom:1rem; }
+    .svc-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.4rem; }
+    .svc-card li { display:flex; align-items:center; gap:.5rem; color:#555; font-size:.8rem; }
+    .svc-card li::before { content:''; display:block; width:6px; height:6px; border-radius:50%; background:#2ecc71; flex-shrink:0; }
+
+    /* ── Cards services — fond sombre ───────────────────────── */
+    .svc-card-dark {
+      background:#1a1a4e;
+      border:1.5px solid rgba(46,204,113,.12);
+      border-radius:1rem;
+      padding:2rem 1.75rem;
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+    .svc-card-dark:hover {
+      border-color:#2ecc71;
+      box-shadow:0 8px 32px rgba(46,204,113,.2);
+      transform:translateY(-5px);
+    }
+    .svc-icon-dark {
+      width:3.25rem; height:3.25rem;
+      background:rgba(46,204,113,.1);
+      border-radius:.875rem;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.25rem;
+      transition: transform .35s ease, background .3s ease;
+    }
+    .svc-card-dark:hover .svc-icon-dark { transform:rotate(8deg) scale(1.05); background:rgba(46,204,113,.2); }
+    .svc-card-dark h3 { color:#fff; font-size:1.05rem; font-weight:700; margin-bottom:.5rem; }
+    .svc-card-dark p  { color:rgba(255,255,255,.5); font-size:.875rem; line-height:1.7; margin-bottom:1rem; }
+    .svc-card-dark ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.4rem; }
+    .svc-card-dark li { display:flex; align-items:center; gap:.5rem; color:rgba(255,255,255,.65); font-size:.8rem; }
+    .svc-card-dark li::before { content:''; display:block; width:6px; height:6px; border-radius:50%; background:#2ecc71; flex-shrink:0; }
+
+    /* ── CTA vert ────────────────────────────────────────────── */
+    #cta-services { background:#2ecc71; }
+    .btn-dark { background-color:#0d0d2b; color:#fff; font-weight:700; transition: background-color .25s, transform .2s, box-shadow .25s; }
+    .btn-dark:hover { background-color:#1a1a4e; transform:translateY(-2px); box-shadow:0 8px 24px rgba(13,13,43,.35); }
+
+    /* ── Reveal scroll ───────────────────────────────────────── */
+    .reveal, .reveal-l, .reveal-r { opacity:0; transition: opacity .8s ease, transform .8s ease; }
+    .reveal   { transform:translateY(40px); }
+    .reveal-l { transform:translateX(-52px); }
+    .reveal-r { transform:translateX(52px); }
+    .reveal.visible, .reveal-l.visible, .reveal-r.visible { opacity:1; transform:none; }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.24s; }
+    .d3 { transition-delay:.38s; }
+    .d4 { transition-delay:.52s; }
+    .d5 { transition-delay:.66s; }
+    .d6 { transition-delay:.80s; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer { background:#050514; }
+    footer a:hover { color:#2ecc71; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex-shrink-0">
+          <img src="assets/images/logo-horizontal.png" alt="SkyWalker" class="h-10 lg:h-12 w-auto object-contain" />
+        </a>
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+          <li><a href="index.html"     class="hover:text-sw-green transition-colors">Accueil</a></li>
+          <li><a href="services.html"  class="text-sw-green font-semibold">Services</a></li>
+          <li><a href="portfolio.html" class="hover:text-sw-green transition-colors">Portfolio</a></li>
+          <li><a href="contact.html"   class="btn-green px-5 py-2 rounded-full text-sm">Nous contacter</a></li>
+        </ul>
+        <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5" aria-label="Ouvrir le menu">
+          <span class="hamburger-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="hamburger-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="hamburger-line block w-4 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0d0d2b]/96 backdrop-blur-md border-t border-white/10">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html"     class="block text-white/80 hover:text-sw-green py-1 transition-colors">Accueil</a></li>
+        <li><a href="services.html"  class="block text-sw-green font-semibold py-1">Services</a></li>
+        <li><a href="portfolio.html" class="block text-white/80 hover:text-sw-green py-1 transition-colors">Portfolio</a></li>
+        <li><a href="contact.html"   class="block text-white/80 hover:text-sw-green py-1 transition-colors">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════ HERO SERVICES ═══════════ -->
+  <section class="hero-geo relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+
+    <!-- Halo radial -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(ellipse 70% 55% at 50% 30%, rgba(46,204,113,.08) 0%, transparent 65%); z-index:1;"></div>
+
+    <!-- Coins décoratifs -->
+    <div class="absolute top-0 left-0 w-72 h-72 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(circle at top left, rgba(46,204,113,.06) 0%, transparent 60%); z-index:1;"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 pointer-events-none" aria-hidden="true"
+         style="background:radial-gradient(circle at bottom right, rgba(46,204,113,.06) 0%, transparent 60%); z-index:1;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-28 pb-16">
+
+      <!-- Breadcrumb -->
+      <nav class="fade-up flex items-center justify-center gap-2 text-xs text-white/35 mb-8 font-medium"
+           style="animation-delay:.05s" aria-label="Fil d'Ariane">
+        <a href="index.html" class="hover:text-sw-green transition-colors">Accueil</a>
+        <svg class="w-3 h-3 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+        <span class="text-sw-green">Services</span>
+      </nav>
+
+      <!-- Badge -->
+      <div class="fade-up inline-flex items-center gap-2.5 border border-sw-green/30 bg-white/[.04] text-sw-green text-xs font-bold px-5 py-2.5 rounded-full mb-8"
+           style="animation-delay:.15s">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        3 pôles d'expertise · Douala, Cameroun
+      </div>
+
+      <!-- Titre -->
+      <h1 class="fade-up text-5xl sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-5"
+          style="animation-delay:.25s">
+        Nos <span class="text-sw-green">Services</span>
+      </h1>
+
+      <!-- Sous-titre vert -->
+      <p class="fade-up text-lg sm:text-xl text-sw-green font-semibold mb-4"
+         style="animation-delay:.4s">
+        Une expertise complète pour votre transformation digitale
+      </p>
+
+      <!-- Description -->
+      <p class="fade-up text-base text-white/40 max-w-2xl mx-auto leading-relaxed"
+         style="animation-delay:.52s">
+        Marketing digital, développement tech, branding créatif — tout ce qu'il faut
+        pour bâtir une présence numérique puissante et générer des résultats concrets.
+      </p>
+
+      <!-- Ancres rapides -->
+      <div class="fade-up flex flex-wrap items-center justify-center gap-3 mt-10"
+           style="animation-delay:.65s">
+        <a href="#marketing" class="border border-sw-green/30 hover:border-sw-green hover:bg-sw-green/10 text-white/70 hover:text-sw-green text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300">
+          Marketing Digital
+        </a>
+        <a href="#tech" class="border border-sw-green/30 hover:border-sw-green hover:bg-sw-green/10 text-white/70 hover:text-sw-green text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300">
+          Tech &amp; Développement
+        </a>
+        <a href="#branding" class="border border-sw-green/30 hover:border-sw-green hover:bg-sw-green/10 text-white/70 hover:text-sw-green text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300">
+          Créatif &amp; Branding
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ MARKETING DIGITAL — fond blanc ═══════════ -->
+  <section id="marketing" class="section-light py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="max-w-2xl mb-16 reveal">
+        <div class="green-line mb-5" style="background:#27ae60;"></div>
+        <p class="sec-label text-xs font-bold tracking-widest uppercase mb-3">Pôle 01</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+          Marketing <span style="color:#27ae60;">Digital</span>
+        </h2>
+        <p class="sec-sub text-base leading-relaxed">
+          Faites exploser votre visibilité en ligne et attirez les bons clients grâce à des stratégies éprouvées et des campagnes ultra-performantes.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- Card 1 — Meta Ads & TikTok Ads -->
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+            </svg>
+          </div>
+          <h3>Meta Ads &amp; TikTok Ads</h3>
+          <p>Des campagnes publicitaires ultra-performantes capables de générer des prospects qualifiés, augmenter vos ventes et booster votre visibilité.</p>
+          <ul>
+            <li>Création visuelle impactante</li>
+            <li>Ciblage intelligent</li>
+            <li>Stratégie de conversion</li>
+            <li>Analyse des performances</li>
+            <li>Optimisation continue</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 — Stratégie Publicitaire -->
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3>Stratégie Publicitaire</h3>
+          <p>La différence entre une campagne qui échoue et une campagne rentable repose sur la stratégie. Nous la concevons pour vous.</p>
+          <ul>
+            <li>Analyse de marché</li>
+            <li>Étude de la cible</li>
+            <li>Analyse concurrentielle</li>
+            <li>Maximisation du ROI</li>
+            <li>Réduction des coûts d'acquisition</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 — Stratégie Marketing -->
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <h3>Stratégie Marketing</h3>
+          <p>Construisez une image claire, un positionnement fort et une communication cohérente qui capte l'attention et fidélise votre audience.</p>
+          <ul>
+            <li>Image de marque</li>
+            <li>Positionnement fort</li>
+            <li>Communication cohérente</li>
+            <li>Stratégie de croissance</li>
+          </ul>
+        </div>
+
+        <!-- Card 4 — Lancement de Produits Tech -->
+        <div class="svc-card reveal d4">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+            </svg>
+          </div>
+          <h3>Lancement de Produits Tech</h3>
+          <p>Votre produit mérite un lancement à la hauteur de son potentiel. Nous orchestrons chaque étape pour maximiser son impact dès le départ.</p>
+          <ul>
+            <li>Branding du produit</li>
+            <li>Stratégie de lancement</li>
+            <li>Acquisition des premiers utilisateurs</li>
+            <li>Communication digitale</li>
+          </ul>
+        </div>
+
+        <!-- Card 5 — Marketing de Solutions Digitales -->
+        <div class="svc-card reveal d5">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+            </svg>
+          </div>
+          <h3>Marketing de Solutions Digitales</h3>
+          <p>Les produits digitaux nécessitent une approche marketing spécifique. Nous construisons votre croissance avec des méthodes adaptées au marché tech.</p>
+          <ul>
+            <li>Acquisition utilisateurs</li>
+            <li>Génération de leads</li>
+            <li>Développement de communauté</li>
+            <li>Accélération de croissance</li>
+          </ul>
+        </div>
+
+        <!-- Card 6 — Gestion des Réseaux Sociaux -->
+        <div class="svc-card reveal d6">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+            </svg>
+          </div>
+          <h3>Gestion des Réseaux Sociaux</h3>
+          <p>Votre image sur les réseaux sociaux influence directement vos ventes. Nous créons, gérons et optimisons votre présence sur toutes les plateformes.</p>
+          <ul>
+            <li>Facebook, Instagram, TikTok</li>
+            <li>LinkedIn, X (Twitter)</li>
+            <li>Création de contenus</li>
+            <li>Design premium</li>
+            <li>Stratégie éditoriale</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ TECH & DÉVELOPPEMENT — fond sombre ═══════════ -->
+  <section id="tech" class="py-24 lg:py-32 relative overflow-hidden" style="background:#0d0d2b;">
+
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]" style="background:rgba(46,204,113,.05);"></div>
+      <div class="absolute -bottom-20 right-1/4 w-[400px] h-[400px] rounded-full blur-[80px]"  style="background:rgba(46,204,113,.04);"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+      <div class="max-w-2xl mb-16 reveal">
+        <div class="green-line mb-5"></div>
+        <p class="text-sw-green text-xs font-bold tracking-widest uppercase mb-3">Pôle 02</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+          Tech &amp; <span class="text-sw-green">Développement</span>
+        </h2>
+        <p class="text-white/40 text-base leading-relaxed">
+          Donnez vie à vos idées avec des solutions digitales modernes, pensées pour offrir une expérience fluide et des performances optimales.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+
+        <!-- Card 1 — UI/UX -->
+        <div class="svc-card-dark reveal d1">
+          <div class="svc-icon-dark">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+            </svg>
+          </div>
+          <h3>Création de Maquettes UI/UX</h3>
+          <p>Des interfaces pensées pour l'utilisateur avant d'être développées. Nous concevons des maquettes modernes, intuitives et prêtes à intégrer.</p>
+          <ul>
+            <li>Wireframes &amp; prototypes interactifs</li>
+            <li>Design system cohérent</li>
+            <li>Tests d'utilisabilité</li>
+            <li>Livraison Figma prête à développer</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 — App Web -->
+        <div class="svc-card-dark reveal d2">
+          <div class="svc-icon-dark">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+          </div>
+          <h3>Développement d'Applications Web</h3>
+          <p>Des plateformes web robustes, rapides et évolutives. Du tableau de bord SaaS à la marketplace, nous codons des solutions sur mesure adaptées à votre vision.</p>
+          <ul>
+            <li>Applications React / Next.js</li>
+            <li>Backend Node.js &amp; API REST</li>
+            <li>Bases de données Supabase / Firebase</li>
+            <li>Déploiement &amp; optimisation</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 — App Mobile -->
+        <div class="svc-card-dark reveal d3">
+          <div class="svc-icon-dark">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3>Développement d'Applications Mobiles</h3>
+          <p>iOS et Android en une seule codebase. Des applications fluides, performantes et pensées pour l'usage quotidien de vos utilisateurs.</p>
+          <ul>
+            <li>React Native &amp; Expo</li>
+            <li>Notifications push</li>
+            <li>Paiements intégrés</li>
+            <li>Publication App Store &amp; Google Play</li>
+          </ul>
+        </div>
+
+        <!-- Card 4 — Sites Internet -->
+        <div class="svc-card-dark reveal d4">
+          <div class="svc-icon-dark">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3>Création de Sites Internet</h3>
+          <p>De la landing page au site vitrine complet, nous créons des sites qui convertissent — modernes, rapides, optimisés SEO et adaptés à tous les écrans.</p>
+          <ul>
+            <li>Sites vitrines &amp; landing pages</li>
+            <li>E-commerce</li>
+            <li>Optimisation SEO</li>
+            <li>Hébergement &amp; maintenance</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CRÉATIF & BRANDING — fond blanc ═══════════ -->
+  <section id="branding" class="section-light py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="max-w-2xl mb-16 reveal">
+        <div class="green-line mb-5" style="background:#27ae60;"></div>
+        <p class="sec-label text-xs font-bold tracking-widest uppercase mb-3">Pôle 03</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+          Créatif &amp; <span style="color:#27ae60;">Branding</span>
+        </h2>
+        <p class="sec-sub text-base leading-relaxed">
+          Construisez une image qui inspire confiance et se démarque. Une marque forte ne se contente pas d'exister — elle marque les esprits.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- Card 1 — Logos -->
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+            </svg>
+          </div>
+          <h3>Création de Logos</h3>
+          <p>Un logo est la première impression de votre marque. Nous créons des identités visuelles uniques, mémorables et adaptées à votre univers.</p>
+          <ul>
+            <li>Concepts originaux &amp; sur mesure</li>
+            <li>Déclinaisons couleur &amp; monochrome</li>
+            <li>Fichiers tous formats (SVG, PNG, PDF)</li>
+            <li>Guide d'utilisation inclus</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 — Identité Visuelle -->
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+          </div>
+          <h3>Identité Visuelle</h3>
+          <p>Au-delà du logo, une identité visuelle complète qui donne à votre marque une cohérence sur tous vos supports, en ligne comme hors ligne.</p>
+          <ul>
+            <li>Charte graphique complète</li>
+            <li>Typographies &amp; palette de couleurs</li>
+            <li>Templates réseaux sociaux</li>
+            <li>Supports print &amp; digital</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 — Visuels & Contenus -->
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#2ecc71" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3>Création de Visuels &amp; Contenus</h3>
+          <p>Des visuels qui captivent, informent et convertissent. Du post Instagram à la bannière publicitaire, nous créons du contenu qui performe.</p>
+          <ul>
+            <li>Visuels réseaux sociaux</li>
+            <li>Bannières publicitaires</li>
+            <li>Affiches &amp; flyers</li>
+            <li>Motion design &amp; vidéo</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CTA — fond vert ═══════════ -->
+  <section id="cta-services" class="py-24 lg:py-32">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+
+      <p class="text-sm font-bold tracking-widest uppercase mb-3" style="color:rgba(13,13,43,.5);">Prêt à passer à l'action ?</p>
+
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-5" style="color:#0d0d2b;">
+        Prêt à transformer<br />votre entreprise&nbsp;?
+      </h2>
+
+      <p class="text-lg max-w-xl mx-auto mb-10 leading-relaxed" style="color:rgba(13,13,43,.7);">
+        Discutons de votre projet. Un expert SkyWalker vous répond sous 24h.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="contact.html" class="btn-dark px-10 py-4 rounded-full text-base inline-block">
+          Nous contacter →
+        </a>
+        <a href="portfolio.html"
+           class="inline-block px-10 py-4 rounded-full text-base font-bold border-2 transition-all duration-300"
+           style="border-color:rgba(13,13,43,.25); color:#0d0d2b;"
+           onmouseover="this.style.borderColor='#0d0d2b'; this.style.background='rgba(13,13,43,.08)';"
+           onmouseout="this.style.borderColor='rgba(13,13,43,.25)'; this.style.background='';">
+          Voir nos réalisations
+        </a>
+      </div>
+
+      <!-- Indicateur de confiance -->
+      <div class="flex flex-wrap items-center justify-center gap-8 mt-14">
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="text-xs font-semibold">Réponse sous 24h</span>
+        </div>
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="text-xs font-semibold">Devis gratuit &amp; sans engagement</span>
+        </div>
+        <div class="flex items-center gap-2" style="color:rgba(13,13,43,.55);">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="text-xs font-semibold">98% de clients satisfaits</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="border-t border-white/5 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div class="md:col-span-2">
+          <img src="assets/images/logo-horizontal.png" alt="SkyWalker" class="h-10 w-auto object-contain mb-5" />
+          <p class="text-white/35 text-sm leading-relaxed max-w-xs">
+            Agence de transformation numérique basée à Douala, Cameroun.
+            Nous transformons vos idées en réalités digitales rentables.
+          </p>
+          <p class="text-sw-green font-semibold text-sm mt-4 italic">"Turn your passion into money"</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Navigation</h4>
+          <ul class="space-y-3 text-sm text-white/35">
+            <li><a href="index.html"     class="hover:text-sw-green transition-colors">Accueil</a></li>
+            <li><a href="services.html"  class="hover:text-sw-green transition-colors">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-sw-green transition-colors">Portfolio</a></li>
+            <li><a href="contact.html"   class="hover:text-sw-green transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Services</h4>
+          <ul class="space-y-3 text-sm text-white/35">
+            <li><a href="#marketing" class="hover:text-sw-green transition-colors">Marketing Digital</a></li>
+            <li><a href="#tech"       class="hover:text-sw-green transition-colors">Tech &amp; Développement</a></li>
+            <li><a href="#branding"   class="hover:text-sw-green transition-colors">Créatif &amp; Branding</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/20 text-xs">&copy; 2026 SkyWalker. Tous droits réservés. · Douala, Cameroun</p>
+        <p class="text-white/20 text-xs">Conçu avec passion par l'équipe SkyWalker</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <script>
+    /* ── Navbar scroll ───────────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Menu hamburger ──────────────────────────────────────── */
+    const menuBtn    = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hLines     = menuBtn.querySelectorAll('.hamburger-line');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', isOpen);
+      if (!isOpen) {
+        hLines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        hLines[1].style.opacity   = '0';
+        hLines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        hLines[2].style.width     = '24px';
+      } else {
+        hLines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        hLines[2].style.width = '16px';
+      }
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        hLines.forEach(l => { l.style.transform = ''; l.style.opacity = '1'; });
+        hLines[2].style.width = '16px';
+      });
+    });
+
+    /* ── Reveal au scroll ────────────────────────────────────── */
+    const revEls = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revEls.forEach(el => revObs.observe(el));
+  </script>
+
+</body>
+</html>
