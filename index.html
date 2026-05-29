@@ -51,7 +51,8 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
     .fade-up { opacity:0; animation: fadeUp .85s ease forwards; }
 
-    .hero-underline { position:relative; white-space:nowrap; }
+    .hero-underline { position:relative; word-break:break-word; overflow-wrap:break-word; }
+    @media (min-width:640px) { .hero-underline { white-space:nowrap; } }
     .hero-underline::after {
       content:''; position:absolute; bottom:-6px; left:0;
       height:5px; width:0; background:#2ecc71; border-radius:3px;
@@ -342,7 +343,7 @@
       </div>
 
       <!-- Titre XXL -->
-      <h1 class="fade-up text-5xl sm:text-6xl lg:text-[5.25rem] font-black leading-[1.06] tracking-tight mb-7"
+      <h1 class="fade-up hero-title font-black tracking-tight mb-7"
           style="animation-delay:.25s">
         Faites De Votre Présence<br />Digitale<br />
         <span class="text-sw-green hero-underline" id="hero-hl">Un Aimant À Clients</span>
