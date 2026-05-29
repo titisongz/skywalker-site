@@ -138,19 +138,27 @@
     .btn-submit:hover:not(:disabled) { background:#27ae60; transform:translateY(-2px); box-shadow:0 8px 24px rgba(46,204,113,.4); }
     .btn-submit:disabled { opacity:.7; cursor:not-allowed; }
 
-    /* ── Message succès ──────────────────────────────────────── */
-    #success-msg {
-      display:none;
+    /* ── Message succès / erreur ─────────────────────────────── */
+    [data-fs-success] {
       background:#dcfce7;
       border:1.5px solid #86efac;
       border-radius:.75rem;
       padding:1.25rem 1.5rem;
       color:#166534;
-      align-items:center;
-      gap:.875rem;
-      margin-top:1.25rem;
+      font-weight:600;
+      font-size:.9rem;
+      margin-bottom:1.25rem;
     }
-    #success-msg.show { display:flex; }
+    [data-fs-error] {
+      background:#fee2e2;
+      border:1.5px solid #fca5a5;
+      border-radius:.75rem;
+      padding:1.25rem 1.5rem;
+      color:#991b1b;
+      font-weight:600;
+      font-size:.9rem;
+      margin-bottom:1.25rem;
+    }
 
     /* ── FAQ Accordion ───────────────────────────────────────── */
     .faq-item { border-bottom:1px solid #e5e7eb; }
@@ -716,25 +724,44 @@
       el.addEventListener('change', () => validateField(el));
     });
 
-    /* Validation avant envoi Formspree — stopImmediatePropagation si invalide */
-    form.addEventListener('submit', e => {
+    /* ── Envoi formulaire via fetch (vanilla JS) ────────────── */
+    const successMsg = document.querySelector('[data-fs-success]');
+    const errorMsg   = document.querySelector('[data-fs-error]');
+    const submitBtn  = form.querySelector('[data-fs-submit-btn]');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
       const required = form.querySelectorAll('[required]');
       let valid = true;
       required.forEach(el => { if (!validateField(el)) valid = false; });
-      if (!valid) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
+      if (!valid) return;
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Envoi en cours…';
+
+      try {
+        const response = await fetch('https://formspree.io/f/xzdwoyly', {
+          method:  'POST',
+          body:    new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display       = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          errorMsg.style.display = 'block';
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Envoyer le message →';
+        }
+      } catch (_) {
+        errorMsg.style.display = 'block';
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Envoyer le message →';
       }
     });
   </script>
-
-  <script>
-    window.formspree = window.formspree || function () {
-      (formspree.q = formspree.q || []).push(arguments);
-    };
-    formspree('initForm', { formElement: '#contact-form', formId: 'xzdwoyly' });
-  </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
