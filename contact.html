@@ -750,6 +750,7 @@
         if (response.ok) {
           form.style.display       = 'none';
           successMsg.style.display = 'block';
+          successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           errorMsg.style.display = 'block';
           submitBtn.disabled    = false;
