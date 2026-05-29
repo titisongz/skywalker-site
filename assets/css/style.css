@@ -1056,3 +1056,20 @@ section#hero { position: relative; min-height: 100vh; display: flex; align-items
 
 /* Grille projets */
 #projects-grid { position: relative; }
+
+/* ── Messages Formspree ───────────────────────────────────── */
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}

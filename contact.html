@@ -399,18 +399,25 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-1">Envoyez-nous un message</h2>
             <p class="text-gray-400 text-sm mb-8">Les champs marqués * sont obligatoires.</p>
 
+            <div data-fs-success style="display:none" class="success-message">
+              ✓ Message envoyé ! Nous vous répondons sous 24h.
+            </div>
+            <div data-fs-error style="display:none" class="error-message">
+              Une erreur est survenue. Réessayez ou contactez-nous sur WhatsApp.
+            </div>
+
             <form id="contact-form" novalidate>
 
               <!-- Nom -->
               <div class="form-group">
                 <label for="nom" class="form-label">Nom complet *</label>
-                <input type="text" id="nom" name="nom" placeholder="Jean Dupont" class="form-input" required />
+                <input type="text" id="nom" name="name" placeholder="Jean Dupont" class="form-input" required data-fs-field />
               </div>
 
               <!-- Email -->
               <div class="form-group">
                 <label for="email" class="form-label">Adresse email *</label>
-                <input type="email" id="email" name="email" placeholder="jean@exemple.com" class="form-input" required />
+                <input type="email" id="email" name="email" placeholder="jean@exemple.com" class="form-input" required data-fs-field />
               </div>
 
               <!-- Téléphone -->
@@ -418,14 +425,14 @@
                 <label for="tel" class="form-label">
                   Téléphone <span class="text-gray-400 font-normal">(optionnel)</span>
                 </label>
-                <input type="tel" id="tel" name="tel" placeholder="+237 6XX XXX XXX" class="form-input" />
+                <input type="tel" id="tel" name="phone" placeholder="+237 6XX XXX XXX" class="form-input" data-fs-field />
               </div>
 
               <!-- Service — 2 colonnes sur tablette+ -->
               <div class="grid sm:grid-cols-2 gap-4">
                 <div class="form-group">
                   <label for="service" class="form-label">Type de service *</label>
-                  <select id="service" name="service" class="form-select" required>
+                  <select id="service" name="service" class="form-select" required data-fs-field>
                     <option value="">Choisissez un service…</option>
                     <option value="marketing">Marketing Digital</option>
                     <option value="tech">Tech &amp; Développement</option>
@@ -435,7 +442,7 @@
                 </div>
                 <div class="form-group">
                   <label for="budget" class="form-label">Budget estimé</label>
-                  <select id="budget" name="budget" class="form-select">
+                  <select id="budget" name="budget" class="form-select" data-fs-field>
                     <option value="">Sélectionnez…</option>
                     <option value="<500k">Moins de 500 000 FCFA</option>
                     <option value="500k-1m">500 000 – 1 000 000 FCFA</option>
@@ -450,24 +457,13 @@
                 <label for="message" class="form-label">Message *</label>
                 <textarea id="message" name="message" rows="5"
                   placeholder="Décrivez votre projet, vos objectifs, vos délais…"
-                  class="form-textarea" required></textarea>
+                  class="form-textarea" required data-fs-field></textarea>
               </div>
 
               <!-- Bouton -->
-              <button type="submit" class="btn-submit">
+              <button type="submit" class="btn-submit" data-fs-submit-btn>
                 Envoyer le message →
               </button>
-
-              <!-- Message succès -->
-              <div id="success-msg" role="alert">
-                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="#16a34a" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <div>
-                  <p class="font-semibold text-sm">Message envoyé avec succès !</p>
-                  <p class="text-sm" style="color:#15803d;">Un expert SkyWalker vous répondra sous 24h.</p>
-                </div>
-              </div>
 
             </form>
           </div>
@@ -699,8 +695,7 @@
     });
 
     /* ── Validation formulaire ───────────────────────────────── */
-    const form       = document.getElementById('contact-form');
-    const successMsg = document.getElementById('success-msg');
+    const form = document.getElementById('contact-form');
 
     function validateField(el) {
       const isEmpty = !el.value.trim();
@@ -721,26 +716,25 @@
       el.addEventListener('change', () => validateField(el));
     });
 
+    /* Validation avant envoi Formspree — stopImmediatePropagation si invalide */
     form.addEventListener('submit', e => {
-      e.preventDefault();
       const required = form.querySelectorAll('[required]');
       let valid = true;
       required.forEach(el => { if (!validateField(el)) valid = false; });
-      if (!valid) return;
-
-      const btn = form.querySelector('.btn-submit');
-      btn.textContent = 'Envoi en cours…';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        form.reset();
-        btn.textContent = 'Envoyer le message →';
-        btn.disabled = false;
-        successMsg.classList.add('show');
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 1200);
+      if (!valid) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
     });
   </script>
+
+  <script>
+    window.formspree = window.formspree || function () {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+    formspree('initForm', { formElement: '#contact-form', formId: 'xzdwoyly' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
